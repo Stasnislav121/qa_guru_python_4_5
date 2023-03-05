@@ -4,15 +4,8 @@ import pytest
 from selene import browser, have, be
 
 
-@pytest.fixture()
-def browser_setup():
-    browser.config.window_width = 768
-    browser.config.window_height = 1440
-    browser.open('https://demoqa.com/automation-practice-form')
-    browser.config.hold_browser_open = True
-
-
-def test_registration_form(browser_setup):
+def test_registration_form():
+    browser.open('/automation-practice-form')
     browser.element('#firstName').type('Ivan')
     browser.element('#lastName').type('Petrov')
     browser.element('#userEmail').type('petrov@abc.com')
@@ -26,4 +19,11 @@ def test_registration_form(browser_setup):
     browser.element('.react-datepicker__day--005').should(have.exact_text('5')).click()
     browser.element('#subjectsInput').type('Maths').press_enter()
     browser.element('label[for="hobbies-checkbox-1"]').click()
-    browser.element('#uploadPicture').send_keys(os.path.abspath('img/one.png'))
+    browser.element('#uploadPicture').send_keys(os.getcwd() + '/img/one.png')
+    browser.element('#currentAddress').type('Rome, Italy')
+    browser.element('#state').click()
+    browser.element('#react-select-3-option-1').click()
+    browser.element('#city').click()
+    browser.element('#react-select-4-option-0').click()
+    browser.element('#submit').click()
+
