@@ -1,7 +1,6 @@
 import os
 
-import pytest
-from selene import browser, have, be
+from selene import browser, have
 
 
 def test_registration_form():
@@ -27,3 +26,24 @@ def test_registration_form():
     browser.element('#react-select-4-option-0').click()
     browser.element('#submit').click()
 
+    browser.element('#example-modal-sizes-title-lg').should(have.exact_text('Thanks for submitting the form'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Student Name')).all('td')[1].should(
+        have.exact_text('Ivan Petrov'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Student Email')).all('td')[1].should(
+        have.exact_text('petrov@abc.com'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Gender')).all('td')[1].should(
+        have.exact_text('Male'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Mobile')).all('td')[1].should(
+        have.exact_text('7123456789'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Date of Birth')).all('td')[1].should(
+        have.exact_text('05 January,1917'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Subjects')).all('td')[1].should(
+        have.exact_text('Maths'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Hobbies')).all('td')[1].should(
+        have.exact_text('Sports'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Picture')).all('td')[1].should(
+        have.exact_text('one.png'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('Address')).all('td')[1].should(
+        have.exact_text('Rome, Italy'))
+    browser.all('.table tr').element_by_its('td', have.exact_text('State and City')).all('td')[1].should(
+        have.exact_text('Uttar Pradesh Agra'))
