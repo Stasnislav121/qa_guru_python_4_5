@@ -1,10 +1,11 @@
 import os
 
-from selene import browser, have
+from selene import browser, have, command
 
 
 def test_registration_form():
     browser.open('/automation-practice-form')
+    browser.element('#fixedban').perform(command.js.remove)
     browser.element('#firstName').type('Ivan')
     browser.element('#lastName').type('Petrov')
     browser.element('#userEmail').type('petrov@abc.com')
@@ -24,7 +25,7 @@ def test_registration_form():
     browser.element('#react-select-3-option-1').click()
     browser.element('#city').click()
     browser.element('#react-select-4-option-0').click()
-    browser.element('#submit').click()
+    browser.element('#submit').perform(command.js.click)
 
     browser.element('#example-modal-sizes-title-lg').should(have.exact_text('Thanks for submitting the form'))
     browser.all('.table tr').element_by_its('td', have.exact_text('Student Name')).all('td')[1].should(
